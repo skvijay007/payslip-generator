@@ -1,34 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Payslip Generator
 
-## Getting Started
+In this application user can input pay data like Annual salary, Super rate, Payment start date etc. and on successfull validation Payslip will be generated and displayed in another page.
+Payslips are calculated and generated based on the below tax table,
 
-First, run the development server:
+| Taxable income| Tax on this income           | 
+| ------------- |:-------------:|
+| 0 - $18,200      | Nil | 
+| $18,201 - $37,000     | 19c for each $1 over $18,200      |  
+| $37,001 - $80,000 | $3,572 plus 32.5c for each $1 over $37,000      | 
+| $80,001 - $180,000 | $17,547 plus 37c for each $1 over $80,000      |    
+| 180,001 and over | $54,547 plus 45c for each $1 over $180,000      |      
 
-```bash
-npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Example inputs and outputs
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Example 1
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+#### Input
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+| First name | Last name | Annual salary | Super rate (%) | Payment start date |
+| ---------- | --------- | ------------- | -------------- | ------------------ |
+| David     | Rudd     | 60050         | 9              | March 1, 2021      |
 
-## Learn More
+#### Output
 
-To learn more about Next.js, take a look at the following resources:
+| Name         | Pay period          | Gross income | Income tax | Net income | Super amount |
+| ------------ | ------------------- | ------------ | ---------- | ---------- | ------------ |
+| David Rudd | 01 March – 31 March | 5004         | 922        | 4082       | 450          |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Example 2
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Input
 
-## Deploy on Vercel
+| First name | Last name | Annual salary | Super rate (%) | Payment start date |
+| ---------- | --------- | ------------- | -------------- | ------------------ |
+| Ryan       | Chen       | 120000        | 10              | March 1, 2021      |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Output
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+| Name         | Pay period          | Gross income | Income tax | Net income | Super amount |
+| ------------ | ------------------- | ------------ | ---------- | ---------- | ------------ |
+| Ryan Chen     | 01 March – 31 March | 10000        | 2696       | 7304       | 1000          |
+
+This application is using [Next.js](http://nextjs.org/) framework on top of [React](http://reactjs.org).
+
+This applications is using the Next.JS architecture with intuitive page based routing system. 
+The layout pages Income Form and Payslips Lists are located in the [pages](pages) directory.
+The Pages subsequent components are located in the [components](components) directory.
+Data has been shared between the components using global [React Context API](https://reactjs.org/docs/context.html).
+
+## Starting this application
+
+1. Install [Node.js](http://nodejs.org/en/).
+3. Download the code using terminal
+    ```bash
+    git clone https://github.com/skvijay007/payslip-generator.git .
+    ```
+4. Install the dependencies
+    ```bash
+    npm install
+    ```
+5. Start the application
+    ```bash
+    npm run build
+    npm run start
+    ```
+6. To start a development version of the application, run
+
+    ```bash
+    npm run dev
+    ```
+7. To test the application, run
+
+    ```bash
+    npm run test
+    ```
+6. Open http://localhost:3000 in your browser.
